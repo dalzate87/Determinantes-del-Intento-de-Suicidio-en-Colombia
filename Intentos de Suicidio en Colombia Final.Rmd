@@ -1,0 +1,978 @@
+---
+title: "Prevención Basada en Datos: Un Enfoque Bayesiano para el Estudio de los Intentos de Suicidio en Colombia en 2023"
+author: "Diego Alejandro Alzate Rodriguez - Maria Estefania Silva Leal"
+date: "2024-11-03"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+  locale: es_ES.UTF-8
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{=html}
+<style>
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    margin-left: 2cm;
+    margin-right: 2cm;
+    line-height: 1.5;
+  }
+</style>
+```
+### Introducción
+
+Según información de la Organización Mundial de la Salud (OMS) cada año
+aproximadamente 726.000 personas deciden quitarse la vida de forma
+exitosa, mientras existen muchos más casos de intentos por hacerlo. El
+fenómeno del suicidio deja una huella dolorosa para aquellos que quedan
+tras la tragedia, las familias, las amistades, los allegados cercanos,
+el entorno y la vecindad de la victima. El suicidio puede ocurrir a
+cualquier edad , siendo más frecuente en población adolescente y adulta
+joven es decir entre los 15 a 21 años a nivel global a partir de datos
+de 2021.
+
+Para definir correctamente el suicidio, debemos decir que es un acto que
+se inflige propiamente de forma voluntaria y en gran parte de los casos
+premeditada, donde se busca lograr la muerte propia. Dentro de esta
+existen 3 eslabones secuenciales que la acompañan según Valladolid
+Nizama (2011) son el deseo suicida, la idea suicida y el acto suicida,
+desencadenantes de la muerte de la persona que las atraviesa.
+
+La complejidad de abordar el suicidio y sus causas ha llevado a grandes
+debates, donde según Moron Pierre(1992) se enfrenta a un problema de
+carácter sociológico, médico y psicológico donde el suicida no está solo
+en su causa sino que sus acciones conllevan de testigos al médico, al
+entorno y que conlleva encarar el problema de su propio suicidio para
+cada uno de ellos, al nivel de su reflexión personal. Para los filósofos
+es una expresión de la libertad individual sobre su propio destino, para
+los sociólogos un fenómeno factorial enraizado en las complejas
+relaciones sociales que nos rodean y para los moralistas y/o religiosos
+conlleva un acto de cobardía ante la incapacidad de encontrar luz que
+ilumine el camino frente a problemas o situaciones altamente estresantes
+o complejas,en resumen un acto de crimen cometido en contra de la
+divinidad y para los psicólogos y psiquiatras aún queda el enigma de la
+búsqueda de su significado pues ha existido a lo largo de toda la
+historia del hombre.
+
+Ahora desde el panorama de salud pública, este fenómeno puede ser
+abordado por intervenciones a menudo de bajo costo para prevenirlo.
+Según la OMS(2024) existen una serie de grupos de riesgo que son
+aquellos con mayor probabilidad a cometer actos de intentos de suicidio
+que otras poblaciones comunes, principalmente en la relación que existe
+entre la presencia de transtornos mentales como la depresión siendo el
+más frecuente y los transtornos asociados al consumo de alcohol y las
+adicciones con el suicidio, esto implica en primera medidad que
+poblaciones con presencia de enfermedades mentales son una primera
+población de alto riesgo, a su vez la presencia de guerras, desastres
+naturales y vivencias altamente estresantes que pueden tener efectos
+catastróficos sobre la vida de los individuos son factores determinantes
+en las conductas suicidas y finalmente los grupos sociales discriminados
+o con ausencia de representatividad como el grupo LGBTI, los reclusos o
+ex-reclusos de prisiones, los migrantes y las poblaciones como las
+indígenas.
+
+Se considera que el principal determinante del suicidio es un intento
+previo de suicido, sin embargo también la presencia de situaciones de
+crisis frente a las cuales no se les ve una salida o causan un
+sufrimiento psíquico inconmesurable, por ejemplo problemas económicos,
+rupturas o disputas de pareja, pérdida del empleo, quiebras financieras
+o dolores crónicos son también causas principales para cometer el acto
+de suicidarse.
+
+### Contexto del Problema
+
+Según DNP(2023) Dirección del desarrollo social, las cifras del
+Instituto de Medicina Legal para 2022, muestra que fallecieron por
+suicidio 8.95 hombres por cada cien mil habitantes y 2.2 mujeres por
+cada cien mil habitantes. Ahora según SIVIGILA(2021) la mayor proporción
+de intentos de suicidio fue de mujeres que de hombres con 73.2 mujeres
+por cada cien mil habitantes, mientras que para los hombres fue de 42.7
+por cada cien mil habitantes, este arquetipo o estructura del fenómeno
+del suicidio y el intento de suicidio por género es común. Se considera
+que la mayor proporción de intentos de suicidios son de mujeres, pero
+que la consolidación de la muerte por suicidio es mayor en los hombres,
+asociado esto a el uso de métodos más violentos o destructivos para la
+autodestrucción como el uso de armas de fuego por ejemplo.
+
+La ausencia de salud mental, es un factor inicial que empieza a
+desencadenar la ideación suicida o el deseo suicida, es decir la primera
+fase del suicidio donde empieza el surgimiento de ideas de
+autodestrucción con el fin de terminar situaciones de alto estres y
+dolor psiquico o físico. La OMS(2024) define la salud mental como un
+estado de bienestar mental que permite a las personas hacer frente a los
+retos que propone la vida de forma constante, a su vez la capacidad de
+aprender y trabajar es decir la construcción del individuo en la
+comunidad. Las afectaciones de la salud mental surgen como transtornos
+mentales o discapacidades psicosociales, que generan altos niveles de
+angustia, problemas para tener una vida funcional o que causan riesgo de
+conducta de autolesión.
+
+La OMS(2024) afirma que a lo largo de la vida distintos factores
+económicos, de crianza, determinantes genéticos individuales y sociales
+pueden contribuir a la presencia o deterioro de la salud mental. Desde
+la perspectiva de los factores psicológicos y biológicos individuales,
+como las habilidades de la gestión de las emociones, el abuso de
+sustancias y el componente genético hacen mas proclive a una persona a
+sufrir problemas de salud mental. A su vez verse expuesto a situaciones
+extremas de violencia, pobreza, desigualdad y la degradación del medio
+ambiente también afectan esta dimensión del bienestar emocional.
+Finalmente podemos abordar la salud mental desde la perspectiva de la
+protección que fortalecen la resiliencia, es decir la presencia de
+habilidades sociales, atributos emocionales como la interacción social
+positiva, el acceso a educación de alta calidad, trabajo decente, vivir
+en vecindarios seguros y la cohesión social reducen la probabilidad de
+afectaciones en la salud mental de los individuos. Ahora es bien sabido
+que existen etapas sensibles en los periodos de vida de los individuos,
+como la niñez donde situaciones como la crianza severa durante esta o el
+maltrato tienen efectos mucho más devastadores a lo largo de la vida que
+si se experimentaran en periodos posteriores de la vida.
+
+En términos de la política pública Colombiana, el documento CONPES(2020)
+3992, estableció una política interesante "Estrategia de la promoción de
+salud mental en Colombia". Su objetivo era generar un gran
+fortalecimiento de los entornos sociales, desde la perspectiva de
+Sen(1999) el desarrollo de las capacidades individuales, el mejoramiento
+de la atención de salud mental en colombia etc. Buscando conjuntamente a
+partir de estas medidas de política reducir la presencia de suicidios en
+la población Colombiana, siendo esta el peor desenlace de la salud
+mental debido a que es prevenible y tiene consecuencias devastadoras en
+los entornos del suicida.
+
+Ahora es importante entender, que existen diferencias en la conducta
+suicida medida en escalas de riesgo, donde las características de la
+ideación y el riesgo del intento determinaran la gravedad de este, es
+decir la probabilidad de fallecer en el intento suicida. Así según Soto
+Pedro, Villareal Casate(2015) tenemos:
+
+-   Leve: Existe deseo o ideación suicida pero sin la construcción de un
+    plan definido, con sensibilidad de autocrítica, es decir la
+    capacidad autónoma de desestimar la ideación.
+
+-   Moderado: En este caso existen planes de ideación, con la presencia
+    de más de dos factores de riesgo y la presencia de antecedentes
+    previos de intento de suicidio.
+
+-   Grave: Existe una idea concreta de hacerse daño a si mismo, existen
+    antecedentes de intento suicida, la conducta refleja rechazo al
+    apoyo social y no hay autocrítica en la conducta suicida, a su vez
+    presenta más de dos factores de riesgo.
+
+-   Extremo: Existe la presencia de varios intentos de suicidio en el
+    pasado y la presencia de comportamiento autolesivo como cortes,
+    quemaduras, golpes y moretones autoinfligidos así como la presencia
+    de conductas autodestructivas como hipersexualidad o poner en riesgo
+    la vida al provocar intencionalmente peleas, conducir a alta
+    velocidad etc.
+
+En términos de los métodos más comunes para acabar la vida y que
+caracterizarlos y restringir y/o dificultar su acceso permite reducir la
+cantidad de suicidios en Colombia y a nivel global se tienen: El uso de
+plaguicidas, especialmente en las areas rurales, las armas de fuego, los
+medicamentos de venta libre principalmente analgésicos donde se busca
+una intoxicación y el ahorcamiento.
+
+En ese orden de ideas a través de Datos obtenidos por el Instituto
+Nacional de Salud para el año 2023 sobre intentos de suicidio en
+población de los distintos departamentos de Colombia, deseamos ver las
+relaciones entre riesgo de intento de suicidio y los distintos factores
+de riesgo como encontrarse en un grupo poblacional marginal o de riesgo,
+los factores socioeconómicos, el sexo y la distribución de la edad en la
+cantidad de intentos. A partir de esto podría darse uso de información a
+priori para realizar modelos predictivos con un enfoque en los métodos
+de la Estadística Bayesiana.
+
+### Objetivo General
+
+-   Desarrollar un modelo probabilístico para estimar y predecir el
+    riesgo de intentos de suicidio en distintos grupos poblacionales en
+    Colombia, integrando información a priori y datos observados, con el
+    fin de identificar factores de riesgo significativos y apoyar la
+    formulación de políticas preventivas efectivas.
+
+### Objetivos Especificos
+
+-   Realizar un análisis exploratorio de datos para identificar factores
+    de riesgo potencialmente significativos asociados a intentos de
+    suicidio en distintos grupos poblacionales, tales como antecedentes
+    familiares, condiciones de salud mental, situaciones
+    socioeconómicas, y factores demográficos.
+
+-   Recopilar y sistematizar datos relevantes de diferentes fuentes
+    (registros de salud, encuestas comunitarias, etc.) para construir un
+    conjunto de datos robusto que refleje la diversidad de grupos
+    poblacionales y sus contextos.
+
+-   Diseñar y ajustar un modelo probabilístico (por ejemplo, regresión
+    logística, modelos de supervivencia, o redes bayesianas) que integre
+    información a priori sobre los factores de riesgo y datos
+    observados, permitiendo estimar el riesgo de intentos de suicidio.
+
+-   Evaluar la precisión y robustez del modelo a través de técnicas de
+    validación cruzada y comparación con modelos alternativos,
+    garantizando que el modelo sea generalizable a diferentes contextos
+    poblacionales
+
+-   Realizar análisis de subgrupos para identificar cómo el riesgo de
+    suicidio varía entre diferentes segmentos de la población (por
+    ejemplo, edad, género, nivel socioeconómico), para proporcionar
+    insights más detallados.
+
+-   Proponer estrategias y políticas de prevención basadas en los
+    hallazgos del modelo, enfocándose en intervenciones dirigidas a los
+    grupos identificados como de mayor riesgo.
+
+### Cronograma de Actividades
+
+| Semana     | Actividades                                                                                                               | Entregables                                                                                                                |
+|-----------------|----------------------------|----------------------------|
+| Semana 1   | \- Identificar y reunir las fuentes de datos relevantes (p. ej., registros de salud, encuestas comunitarias).             | Documento con resumen de las fuentes de datos, variables principales y un conjunto de datos preprocesado.                  |
+|            | \- Realizar una limpieza inicial de los datos y estandarización de formatos.                                              |                                                                                                                            |
+|            | \- Documentar los factores de riesgo clave y variables demográficas de interés.                                           |                                                                                                                            |
+| ---------- | -----------------------------------------------------------------------------------------------------------               | -----------------------------------------------------------------------------------------------------------                |
+| Semana 2   | \- Generar visualizaciones para entender la distribución y frecuencia de las variables.                                   | Informe de EDA con gráficos, estadísticas descriptivas y lista de factores de riesgo potencialmente significativos.        |
+|            | \- Identificar correlaciones preliminares entre factores de riesgo y la variable objetivo (intentos de suicidio).         |                                                                                                                            |
+|            | \- Realizar análisis descriptivo por subgrupos para detectar patrones iniciales.                                          |                                                                                                                            |
+| ---------- | -----------------------------------------------------------------------------------------------------------               | -----------------------------------------------------------------------------------------------------------                |
+| Semana 3   | \- Evaluar distintos enfoques de modelado (regresión logística, modelos bayesianos, etc.) y decidir el enfoque principal. | Documento de diseño del modelo, con justificación de la selección y esquema de integración de datos observados y a priori. |
+|            | \- Definir las estructuras de los datos necesarios para el modelo, incluyendo cómo integrar información a priori.         |                                                                                                                            |
+|            | \- Crear un plan detallado de los pasos de implementación del modelo.                                                     |                                                                                                                            |
+| ---------- | -----------------------------------------------------------------------------------------------------------               | -----------------------------------------------------------------------------------------------------------                |
+| Semana 4   | \- Implementar un prototipo del modelo seleccionado usando un conjunto reducido de datos.                                 | Prototipo del modelo inicial, informe de evaluación preliminar y ajustes recomendados.                                     |
+|            | \- Realizar una evaluación preliminar de desempeño (precisión, sensibilidad, especificidad).                              |                                                                                                                            |
+|            | \- Documentar los ajustes necesarios y posibles mejoras para la siguiente fase.                                           |                                                                                                                            |
+
+### Marco Teórico
+
+#### Datos
+
+La base de datos fue obtenida de la página web del Sistema Nacional de
+Vigilancia en Salud Pública (SIVIGILA). Durante la búsqueda de
+microdatos, se seleccionó el conjunto de datos de Intento de Suicidio
+correspondiente al año 2023. Esta base de datos contiene información de
+40,850 individuos y abarca un total de 73 variables. Para este estudio,
+se consideraron las siguientes variables:
+
+-   **Sexo:** Femenino y Masculino.
+
+-   **Edad:** 5-93 años.
+
+-   **Departamento de ocurrencia:** Bogotá, Atlántico, Valle, Tolima,
+    Magdalena, Nariño, Antioquia, Santander, Cundinamarca, Risaralda,
+    Casanare, Boyacá, Sucre, Cauca, Quindío, Cesar, Bolívar, Norte de
+    Santander, Chocó, Caldas, Meta, Huila, Caquetá, Vichada, Putumayo,
+    Guajira, Amazonas, Córdoba, Arauca, Vaupés, Guaviare, Exterior,
+    Guainía y San Andrés.
+
+-   **Estrato socioeconómico:** 1,2,3,4,5 y 6. Además, se encuentran NA
+    posiblemente por zonas rurales que carecen de estratificación.
+
+-   **Grupos poblacionales:** Carcelario, Desmovilizados, Desplazados,
+    Dicapacitados, Gestantes, Indígenas, Madres Comunitarias, Migrantes,
+    Otros, Conflicto armado, Pacientes psiquiátricos y Víctimas de
+    violencia.
+
+#### Análisis descriptivo
+
+A continuación, presentamos algunos gráficos y tablas para comprender el
+comportamiento de las variables de estudio mencionadas en la sección
+anterior.
+
+```{r include=FALSE}
+# Librerias Necesarias
+
+library(corrplot)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(readxl)
+library(scales)
+library(tidyr)
+
+# Cargar el archivo
+data <- read_excel("Datos_2023.xlsx")
+
+# Convertir fechas y crear variables de año y semana si es necesario
+data <- data %>%
+  mutate(FEC_NOT = as.Date(FEC_NOT, format = "%Y-%m-%d"),
+         SEMANA = as.integer(SEMANA),
+         ANO = as.integer(ANO))
+
+data$SEXO <- as.character(data$SEXO)
+data$SEXO[data$SEXO == "F"] <- "Femenino" 
+data$SEXO[data$SEXO == "M"] <- "Masculino"
+data$SEXO <- factor(data$SEXO)
+
+# 1. Distribución de intentos por sexo
+sexo_dist <- data %>%
+  count(SEXO) %>%
+  mutate(Percentage =round(n / sum(n) * 100,2))   # Calcular porcentaje
+# Gráfico de distribución por sexo
+sexo_plot <- sexo_dist %>%
+  ggplot(aes(x = SEXO, y = Percentage, fill = SEXO)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +  # Mostrar porcentaje
+  labs(title = "Distribucion de Intentos de Suicidio por Sexo", x = "Sexo", y = "Porcentaje") +
+  theme_minimal()+
+  theme(legend.position = "none")
+```
+
+```{r include=TRUE, echo=FALSE}
+sexo_plot
+```
+
+*Figura 1: Distribución de Intentos de Suicidio por Sexo. Fuente:
+Elaboración propia.*
+
+```{r include=FALSE}
+#con kable
+dist_sexo<-kable(sexo_dist,col.names = c('Sexo', 'Total', 'Porcentaje'))%>%
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")%>%  
+  row_spec(0, bold = T, color = "white", background = "skyblue", align="1")
+```
+
+```{r include=TRUE, echo=FALSE}
+dist_sexo
+```
+
+*Tabla 1: Distribución de Intentos de Suicidio por Sexo. Fuente:
+Elaboración propia.*
+
+En la **Gráfica 1** y **Tabla 1** podemos observar que el 64.9% de los
+intentos de suicidio cometidos son por mujeres,mientras que el 35.1% es
+por hombres. Las mujeres presentan una mayor frecuencia de intentos de
+suicidio que los hombres debido a una interacción compleja de factores
+psicológicos, sociales y biológicos. Los trastornos afectivos, como la
+depresión y la ansiedad, son más prevalentes en mujeres y pueden estar
+exacerbados por factores como el abuso y la violencia de género,
+situaciones que muchas mujeres experimentan de manera desproporcionada y
+que afectan su salud mental. Socialmente, las expectativas de ser
+cuidadoras y de manejar sus emociones en silencio pueden llevar a que
+las mujeres internalicen sus problemas, aumentando su riesgo de intentos
+autolesivos. Además, las mujeres suelen utilizar métodos de suicidio
+menos letales y tienden a buscar ayuda profesional con mayor frecuencia,
+lo que incrementa el registro de intentos no fatales. También influyen
+los cambios hormonales, que pueden afectar el estado de ánimo y aumentar
+la vulnerabilidad en diferentes etapas de la vida, como el ciclo
+menstrual, el posparto y la menopausia. Estos factores hacen que las
+mujeres intenten suicidarse más, aunque las tasas de suicidio consumado
+sigan siendo más altas en los hombres debido a diferencias en los
+métodos empleados.
+
+```{r include=FALSE}
+# Agrupar las edades en intervalos de 10 años para mejorar la visualización
+data <- data %>%
+  mutate(Edad_Grupo = cut(as.numeric(EDAD), breaks = seq(0, 100, by = 10), right = FALSE, 
+                          labels = c("0-9", "10-19", "20-29", "30-39", "40-49", 
+                                     "50-59", "60-69", "70-79", "80-89", "90-99")))
+# 2.1 Tabla de distribución por grupos de edad
+edad_grupo_dist <- data %>%
+  count(Edad_Grupo) %>%
+  mutate(Percentage = round(n / sum(n) * 100,2))
+edad_grupo_plot <- edad_grupo_dist %>%
+  ggplot(aes(x = Edad_Grupo, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  labs(title = "Distribucion de Intentos de Suicidio por Grupos de Edad", x = "Grupo de Edad", y = "Porcentaje") +
+  theme_minimal()
+```
+
+```{r include=TRUE, echo=FALSE}
+edad_grupo_plot
+```
+
+*Figura 2: Distribución de Intentos de Suicidio por Grupos de Edad.
+Fuente: Elaboración propia.*
+
+```{r include=FALSE}
+dist_edad_grupo<-kable(edad_grupo_dist,col.names = c('Grupo de edad', 'Total', 'Porcentaje'))%>%
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")%>%  
+  row_spec(0, bold = T, color = "white", background = "skyblue", align="1")
+```
+
+```{r include=TRUE, echo=FALSE}
+dist_edad_grupo
+```
+
+*Tabla 2: Distribución de Intentos de Suicidio por Grupos de Edad.
+Fuente: Elaboración propia.*
+
+En la **Gráfica 2** y **Tabla 2** se puede evidenciar que:
+
+-   Grupo de 10 a 19 años: Este grupo tiene el porcentaje más alto de
+    intentos de suicidio, superando el 40%. Esto sugiere que los
+    adolescentes son el grupo más vulnerable, posiblemente debido a
+    factores como la presión social, problemas emocionales, cambios
+    hormonales, y situaciones de acoso escolar o conflictos familiares.
+-   Grupo de 20 a 29 años: Este grupo sigue en frecuencia con más del
+    30% de los intentos. Los adultos jóvenes enfrentan desafíos propios
+    de la transición hacia la vida adulta, como la presión laboral,
+    académica, económica y social, lo que puede incrementar su riesgo de
+    conductas autolesivas.
+-   Grupos de 30 a 39 años y 40 a 49 años: La frecuencia de intentos de
+    suicidio disminuye en estos grupos, pero aún representa una
+    proporción notable, alrededor del 10% en el grupo de 30 a 39 años y
+    menor en el grupo de 40 a 49 años. Estos grupos pueden experimentar
+    estrés relacionado con la estabilidad laboral, familiary económica.
+-   Grupos de 50 años en adelante: Los porcentajes de intentos de
+    suicidio siguen disminuyendo conforme avanza la edad.
+-   En los grupos de 50-59, 60-69, y 70-79 años,los intentos de suicidio
+    representan porcentajes pequeños, con una mínima representación en
+    los grupos de 80 años o más. Esto puede deberse a diferentes
+    factores, como la adaptación psicológica a los problemas o la menor
+    incidencia de situaciones de riesgo en edades avanzadas.
+
+```{r include=FALSE}
+# 3. Distribución geográfica de intentos por departamento
+geo_dist <- data %>%
+  count(Departamento_ocurrencia) %>%
+  mutate(Percentage = round(n / sum(n) * 100,2))
+
+geo_plot <- geo_dist %>%
+  ggplot(aes(x = reorder(Departamento_ocurrencia, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "darkgreen") +
+  coord_flip() +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  labs(title = "Distribucion Geográfica de Intentos de Suicidio", x = "Departamento", y = "Porcentaje") +
+  theme_minimal()
+```
+
+```{r include=TRUE, echo=FALSE}
+geo_plot
+```
+
+*Figura 3: Distribución Geográfica de Intentos de Suicidio. Fuente:
+Elaboración propia.*
+
+```{r include=FALSE}
+
+dist_geo<-kable(geo_dist,col.names = c('Departamento de ocurrencia', 'Total', 'Porcentaje'))%>%
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")%>%  
+  row_spec(0, bold = T, color = "white", background = "skyblue", align="1")
+```
+
+```{r include=TRUE, echo=FALSE}
+dist_geo
+```
+
+*Tabla 3: Distribución Geográfica de Intentos de Suicidio. Fuente:
+Elaboración propia.*
+
+La **Gráfica 3** y **Tabla 3** se muestra que:
+
+-   Antioquia, Bogotá y Valle del Cauca: Estos son los lugares con los
+    porcentajes más altos de intentos de suicidio, representando
+    alrededor del 15%, 12% y 8% respectivamente. Esto puede estar
+    relacionado con el tamaño de la población, ya que estos
+    departamentos también tienen grandes concentraciones de habitantes
+    y, con frecuencia, enfrentan problemas asociados a la vida urbana,
+    como el estrés, la violencia y la desigualdad.
+
+-   Departamentos de mediana incidencia: Departamentos como
+    Cundinamarca, Atlántico, Santander y Nariño muestran porcentajes
+    intermedios, entre el 3% y 6%. Estas regiones, aunque menos pobladas
+    que las grandes ciudades, pueden tener factores de riesgo
+    específicos relacionados con condiciones socioeconómicas o acceso
+    #limitado a servicios de salud mental.
+
+-   Departamentos de baja incidencia: En la parte inferior del gráfico,
+    se encuentran departamentos como Guainía, Vaupés y Amazonas, que
+    tienen porcentajes muy bajos de intentos de suicidio (cercanos a
+    cero). Esto puede deberse a su baja densidad #poblacional y al
+    aislamiento geográfico, aunque también podría reflejar una
+    subestimación por falta de registros o acceso a servicios de salud
+    en áreas remotas.
+
+Según (A. Lopez et al, 2022) entre las causas principales del suicidio
+en el departamento de Antioquia están las enfermedades mentales como la
+depresión, las enfermedades terminales, los problemas económicos,
+laborales y escolares, también los problemas sentimentales y las
+perdidas.
+
+```{r include=FALSE}
+# 4. Distribución por estrato socioeconómico
+data <- data %>% 
+  filter(!is.na(estrato))
+
+estrato_dist <- data %>%
+  count(estrato) %>%
+  mutate(Percentage = round(n / sum(n) * 100,2))
+
+# Gráfico de distribución por estrato socioeconómico
+estrato_plot <- estrato_dist %>%
+  ggplot(aes(x = estrato, y = Percentage, fill = factor(estrato))) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  labs(title = "Distribucion de Intentos de Suicidio por Estrato Socioeconómico", x = "Estrato", y = "Porcentaje") +
+  theme_minimal()+theme(legend.position = "none")
+
+```
+
+```{r include=TRUE, echo=FALSE}
+estrato_plot
+```
+
+*Figura 4: Distribución de Intentos de Suicidio por estrato
+socioeconómico. Fuente: Elaboración propia.*
+
+```{r include=FALSE}
+# Tabla de distribución por estrato socioeconómico
+estrato_dista<-kable(estrato_dist,col.names = c('Departamento de ocurrencia', 'Total', 'Porcentaje'))%>%
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left")%>%  
+  row_spec(0, bold = T, color = "white", background = "skyblue", align="1")
+```
+
+```{r include=TRUE, echo=FALSE}
+estrato_dista
+```
+
+*Tabla 4: Distribución de Intentos de Suicidio por estrato
+socioeconómico. Fuente: Elaboración propia.*
+
+En la **Gráfica 4** y **Tabla 4** se observa que los estratos 1, con
+14588, y 2, con 16966, cuentan con una mayor tasa de suicidio que los
+estratos medio y alto, agrupando el 77.24% del total. Según el
+(Observatorio de Mujeres, 2023), el estado de bienestar está relacionado
+con la esfera personal y colectiva. En esta última se encuentra el
+contexto social en el que se desarrolla la salud mental e incide en
+distintos factores, como el poder adquisitivo. Ligado a esto, se
+encuentra la expectativa de que el bienestar se traslade del individuo
+al Estado. En ese orden de ideas, el Estado debe decidir en qué
+priorizar el presupuesto público para maximizar el bienestar de la
+sociedad, lo que naturalmente lleva a la desigualdad y al rezago de
+grupos sociales.
+
+```{r include=FALSE}
+# 5. Distribución por grupos poblacionales (variables GP_)
+gp_data <- data %>%
+  select(starts_with("GP_")) %>%
+  pivot_longer(cols = everything(), names_to = "Grupo_Poblacional", values_to = "Pertenencia") %>%
+  filter(Pertenencia == 1) %>%  # Filtramos solo aquellos con pertenencia al grupo
+  count(Grupo_Poblacional) %>%
+  mutate(Percentage =round (n / sum(n) * 100,2))
+
+gp_data$Grupo_Poblacional <- c("Carcelario", "Desmovilizados", "Desplazados", "Dicapacitados", 
+                   "Gestantes", "Indígenas", "Madres Comunitarias", "Migrantes", "Otros", 
+                   "Conflicto armado", "Pacientes psiquiátricos", 
+                   "Víctimas de violencia")
+
+# Gráfico de distribución por grupos poblacionales
+gp_plot<- gp_data %>%
+  ggplot(aes(x = reorder(Grupo_Poblacional, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  geom_text(aes(label = paste0(Percentage, "%")), 
+            hjust = -0.1, color = "black", size = 3) + 
+  coord_flip() +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  labs(title = "Distribucion de Intentos de Suicidio por Grupo Poblacional", x = "Grupo Poblacional", y = "Porcentaje") +
+  theme_minimal()
+```
+
+```{r include=TRUE, echo=FALSE}
+gp_plot
+```
+
+*Gráfica 5: Distribución de Intentos de Suicidio por grupos
+poblacionales. Fuente: Elaboración propia.*
+
+```{r include=FALSE}
+
+# Crear la tabla con los nuevos nombres
+gp_datata <- kable(gp_data, col.names = c('Grupo', 'Total', 'Porcentaje')) %>%
+  kable_styling(bootstrap_options = "striped", full_width = T, position = "left") %>%
+  row_spec(0, bold = T, color = "white", background = "skyblue", align = "1")
+```
+
+```{r include=TRUE, echo=FALSE}
+gp_datata
+```
+
+*Tabla 5: Distribución de Intentos de Suicidio por grupos poblacionales.
+Fuente: Elaboración propia.*
+
+La **Gráfica 5** y **Tabla 5** muestran que el grupo poblacional
+denominado como "otros" tiene la mayoría de individuos implicados, ya
+que el porcentaje es del 89.4%. Los pacientes con trastornos
+psiquiátricos le siguen con un 3.11%, esto se debe a que estos últimos
+están más controlados, puesto que se asume que asisten a controles cada
+cierto tiempo para enfrentar sus problemas emocionales. Es
+imprescindible estudiar a fondo esta población para tener certeza de
+quiénes la conforman. Posiblemente, pueden ser personas con enfermedades
+crónicas o personas que presentan vulnerabilidad debido a su identidad
+de género y sexual.
+
+```{r include=FALSE}
+# 6. Tendencias temporales por semana y año
+trend_week <- data %>%
+  count(ANO, SEMANA) %>%
+  ggplot(aes(x = SEMANA, y = n, color = factor(ANO))) +
+  geom_line() +
+  labs(title = "Tendencia de Intentos de Suicidio por Semana y Año", x = "Semana", y = "Conteo", color = "Año") +
+  theme_minimal()
+```
+
+```{r include=TRUE, echo=FALSE}
+trend_week
+```
+
+*Gráfica 6: Tendencia de Intentos de Suicidio por Semana y Año. Fuente:
+Elaboración propia.*
+
+Se evidencia que en la **Gráfica 6** las primeras semanas del año hay un
+aumento en los intentos de suicidio, con un valor inicial cercano a los
+650 casos en la primera semana, lo que aumenta progresivamente hasta
+superar los 900 casos alrededor de la semana 15 aproximadamente. Por
+otra parte la presencia de subidas y bajadas intermitentes sugieren
+estacionalidad, por lo que podría ser bueno hacerlo comparativo a otros
+años y ver si este comportamiento es repetitivo.
+
+Ahora desde la semana 40, empieza a presentarse una continua caida en
+los intentos de suicidio de los individuos llegando a uno de los puntos
+más bajos del año después de la semana 50. Ahora intuitivamente,
+podriamos pensar o construir la hipótesis que las fiestas decembrinas y
+las vacaciones que conllevan estas, así como la conciencia natural de
+que termina un ciclo temporal y previene uno nuevo con oportunidades y
+esperanza, al igual que el aumento de las reuniones familiares y eventos
+sociales lleva a las personas a dimitir las tendencias suicidas,
+viendose este efecto en diciembre y las primeras semanas de Enero y
+Febrero.
+
+### Posibles hipótesis
+
+1.  Los hombres en estratos socioeconómicos bajos tienen mayor
+    probabilidad de intentar atentar contra su vida que las mujeres que
+    se encuentran en su misma clase social.
+
+2.  Independientemente del espacio temporal, las mujeres tendrán más
+    intentos de suicidio que los hombres.
+
+3.  La densidad poblacional y los factores consecuentes de ella, inciden
+    en el riesgo de suicidio.
+
+## Modelo Bayesiano
+
+Primero se tomarán algunas variables de la base de datos original:
+
+-   Departamento de ocurrencia
+-   Edad
+-   Sexo
+-   Area
+-   Tipo Seguridad social
+-   Grupos poblacionales
+-   Semana de gestación
+-   Nombre de nacionalidad
+-   Estrato
+
+
+```{r}
+# Agrupar por departamento
+data_group <- data %>%
+  drop_na(estrato) %>% 
+  group_by(COD_DPTO_O, Departamento_ocurrencia, estrato) %>%
+  summarise(
+    Edad = mean(as.numeric(EDAD), na.rm = TRUE),
+    Tot_Fem = sum(SEXO == "Femenino"),
+    Tot_Masc = sum(SEXO == "Masculino"),
+    Tot_contri = data.frame(prop.table(table(TIP_SS)))[1,2],
+    Tot_Ind = data.frame(prop.table(table(TIP_SS)))[2,2],
+    Tot_Noafi = data.frame(prop.table(table(TIP_SS)))[3,2],
+    Tot_Especial = data.frame(prop.table(table(TIP_SS)))[4,2],
+    Tot_Subsi = data.frame(prop.table(table(TIP_SS)))[5,2],
+    Intentos = n()
+  )
+```
+
+Para este estudio se tendrá en cuenta la tasa de suicidios en cada
+departamento, se hará un conteo la cantidad de suicidios ponderado por el número de habitantes para cada departamento, esto se hará por cada grupo.
+
+```{r}
+library(stringi)
+# Población total 2023
+datos_pob2023 <- read_excel("proyecciones_poblacion_2023-2050.xlsx",
+                            range = "A12:E2091")
+
+colnames(datos_pob2023) <- c("DP","DPDNOM","YEAR","AREA","POB")
+
+# Filtramos por año y total
+datos_pob2023 <- datos_pob2023[datos_pob2023$YEAR == 2023 & 
+                                 datos_pob2023$AREA == "Total",] 
+
+# Convertimos a minuscula y quitamos tildes
+datos_pob2023$AREA <- stri_trans_general(tolower(datos_pob2023$AREA),"Latin-ASCII")
+datos_pob2023$DPDNOM <- stri_trans_general(tolower(datos_pob2023$DPDNOM),"Latin-ASCII")
+datos_pob2023 <- datos_pob2023 %>% 
+  mutate(DPDNOM = ifelse(DPDNOM == "bogota, d.c.","bogota",DPDNOM))
+
+# Convertimos a minuscula y quitamos tildes dataset original
+data_group$Departamento_ocurrencia <- stri_trans_general(tolower(data_group$Departamento_ocurrencia),"Latin-ASCII")
+
+#
+data_group <- data_group %>% 
+  rename("DPDNOM" = "Departamento_ocurrencia")
+
+data_group_2023 <- merge(data_group,datos_pob2023, by = "DPDNOM")
+
+# Calculamos la Tasa de Suicidio por Departamento para cada grupo
+data_group_2023$Tasa_Suici <- data_group_2023$Intentos / data_group_2023$POB
+data_group_2023$DPDNOM <- factor(data_group_2023$DPDNOM)
+data_group_2023$estrato <- factor(data_group_2023$estrato)
+```
+
+```{r}
+# Cargamos datos de Suicidio 2020 y agrupamos
+data_2020 <- read_excel("Datos_2020.xls")
+data_group_2020 <- data_2020 %>%
+  drop_na(estrato) %>% 
+  group_by(COD_DPTO_O, Departamento_ocurrencia, estrato) %>%
+  summarise(
+    Edad = mean(as.numeric(EDAD), na.rm = TRUE),
+    Tot_Fem = sum(SEXO == "F"),
+    Tot_Masc = sum(SEXO == "M"),
+    Tot_contri = data.frame(prop.table(table(TIP_SS)))[1,2],
+    Tot_Especial = data.frame(prop.table(table(TIP_SS)))[2,2],
+    Tot_Ind = data.frame(prop.table(table(TIP_SS)))[3,2],
+    Tot_Noafi = data.frame(prop.table(table(TIP_SS)))[4,2],
+    Tot_priv = data.frame(prop.table(table(TIP_SS)))[5,2],
+    Tot_Subsi = data.frame(prop.table(table(TIP_SS)))[6,2],
+    Intentos = n()) 
+
+```
+
+```{r}
+# Cargamos Datos de Población por Departamento 2020
+datos_pob2020 <- read_excel("proyecciones_poblacion_2023-2050.xlsx",
+                            range = "A12:E2091")
+colnames(datos_pob2020) <- c("DP","DPDNOM","YEAR","AREA","POB")
+
+# Filtramos por año y total
+datos_pob2020 <- datos_pob2020[datos_pob2020$YEAR == 2020 & 
+                                 datos_pob2020$AREA == "Total",] 
+
+# Convertimos a minuscula y quitamos tildes
+datos_pob2020$AREA <- stri_trans_general(tolower(datos_pob2020$AREA),"Latin-ASCII")
+datos_pob2020$DPDNOM <- stri_trans_general(tolower(datos_pob2020$DPDNOM),"Latin-ASCII")
+datos_pob2020 <- datos_pob2020 %>% 
+  mutate(DPDNOM = ifelse(DPDNOM == "bogota, d.c.","bogota",DPDNOM))
+
+#
+data_group_2020 <- data_group_2020 %>% 
+  rename("DPDNOM" = "Departamento_ocurrencia")
+#
+data_group_2020$DPDNOM <- stri_trans_general(tolower(data_group_2020$DPDNOM),
+                                            "Latin-ASCII")  
+data_group_2020 <- merge(data_group_2020,datos_pob2020, by = "DPDNOM")
+
+# Calculamos la Tasa de Suicidio por Departamento para cada grupo
+data_group_2020$Tasa_Suici <- data_group_2020$Intentos / data_group_2020$POB 
+
+#Escalamos y ajustamos datos
+data_group_2023 <- data_group_2023 %>% 
+  mutate(across(starts_with("Tot_"), ~ replace_na(.,0)))
+# Evitar la aparicion de valores iguales a cero o uno
+data_group_2023$Tasa_Suici <- (data_group_2023$Tasa_Suici*(nrow(data_group_2023)-1)+ 0.5)/nrow(data_group_2023)
+
+
+```
+
+Ahora podemos construir la información a priori, estimando los Betas es decir las elasticidades o efectos de cada variable explicativa sobre la tasa de suicidios a nivel Departamental, agrupados por estrato socioeconómico.
+
+```{r, warning=FALSE}
+library(betareg)
+library(gamlss)
+data_group_2020$DPDNOM <- factor(data_group_2020$DPDNOM)
+data_group_2020$estrato <- factor(data_group_2020$estrato)
+# Evitar la aparicion de valores iguales a cero o uno
+data_group_2020$Tasa_Suici <- (data_group_2020$Tasa_Suici*(nrow(data_group_2020)-1)+ 0.5)/nrow(data_group_2020)
+
+# Cambiar NA's por cero en las proporciones de los totales
+data_group_2020 <- data_group_2020 %>% 
+  mutate(across(starts_with("Tot_"), ~ replace_na(.,0)))
+
+#
+modelo_gamlss <- gamlss(Tasa_Suici ~ Edad + estrato +Tot_Fem+ Tot_Masc + Tot_contri + Tot_Especial + Tot_Ind + Tot_Subsi + Tot_Noafi,
+                  family = BEZI,
+                  data = data_group_2020)
+
+#
+modelo_poisson <- gamlss(Intentos ~ Edad + estrato + Tot_Fem + Tot_Masc + Tot_contri + Tot_Especial + Tot_Ind + Tot_Noafi + Tot_Subsi , 
+                  family = PO,
+                  data = data_group_2020)
+summary(modelo_gamlss)
+summary(modelo_poisson)
+```
+```{r}
+library(kableExtra)
+# Comparación de Modelos
+predic_beta <- fitted(modelo_gamlss)
+predic_pois <- fitted(modelo_poisson)
+
+#
+observados <- data_group_2020$Tasa_Suici
+MAE_b <- round(mean(abs(observados - predic_beta)),4)
+MAE_p <- round(mean(abs(observados - predic_beta)),4)
+MAD_b <- median(abs(observados -predic_beta))
+MAD_p <- round(median(abs(observados -predic_pois)),4)
+RMSE_b <- round(sqrt(mean((observados - predic_beta)^2)),4)
+RMSE_p <- round(sqrt(mean((observados - predic_pois)^2)),4)
+
+# Tabla para ordenarlos
+tabla1 <- data.frame(Modelo = c("Beta","Poisson"),
+           MAE = c(MAE_b,MAE_p), MAD = c(MAD_b,MAD_p),
+           RMSE = c(RMSE_b,RMSE_p))
+kable(tabla1)
+```
+
+
+
+
+
+
+
+
+
+
+```{r}
+# Diagnósticos del Modelo
+wp(modelo_gamlss)
+plot(modelo_gamlss)
+betas_mu <- exp(modelo_gamlss$mu.coefficients)/(1+exp(modelo_gamlss$mu.coefficients)); betas_mu
+
+```
+
+
+Ahora a partir de esto, tenemos valores a priori para los datos de la tasa de suicidio que podemos usar para la realización de estimaciones bayesianas, para estas mismas elasticidades, representadas por $\beta_j \;\text{con} \; j= 0,\cdots,13$ asociadas principalmente a variables socioeconómicas y de acceso a servicios de salud.
+
+Podemos definir formalmente nuestro modelo beta para la Tasa de Suicidios en Colombia $(y_i)$ como:
+
+$$
+y_i \sim Beta(\mu_i \cdot \phi, (1-\mu_i)\cdot\phi)
+
+$$
+donde:
+
+- $\mu_i = g^{-1}(X_i\beta$, con $g^{-1}$ como la función inversa del enlace(logit)
+- $X_i$; Matriz de Predictores
+- $\beta$: Vector de coeficientes o elasticidades de cada variable e interes que explica la tasa de suicidio por departamento.
+- $\phi$: Parámetro de precisión (mayor $\phi$ implica menor varianza.)
+
+### Información a Priori:
+
+Con los $\beta_j$ estimados para el año 2020, que contienen los efectos de la edad, el estrato socieconómico, el total hombres y mujeres, además del tipo de servicio de salud construimos nuestro $\mu_{prior}$. Así construimos el modelo:
+
+- $\beta_j \sim N(\mu_{prior,j},\sigma^2_{prior,j}$
+- $\phi \sim Gamma(\alpha_{\phi},\beta_{\phi})$
+
+```{r}
+mu_prior <- coef(modelo_gamlss, what = "mu") #Coeficientes estimados
+# Extraer QR del modelo ajustado
+qr_decomp <- modelo_gamlss$mu.qr
+
+# Obtener los residuos estandarizados y el sigma ajustado
+residuos <- modelo_gamlss$residuals
+sigma <- sqrt(sum(residuos^2) / modelo_gamlss$df.residual)
+
+# Extraer la matriz triangular superior R
+R <- qr.R(qr_decomp)
+
+# Calcular la varianza de los coeficientes
+var_coef <- diag(solve(R) %*% t(solve(R))) * sigma^2
+
+# Calcular errores estándar (raíz de la varianza)
+sigma_prior <- sqrt(var_coef)
+```
+
+```{r}
+library(rjags)
+
+# Construimos la matriz de diseño
+X <- model.matrix(~Edad + estrato + Tot_Fem + Tot_Masc + Tot_contri + Tot_Especial + Tot_Ind + Tot_Subsi ,data = data_group_2023)
+y <- data_group_2023$Tasa_Suici
+p <- ncol(X)
+tau_prior <- 1/ sigma_prior^2 #Precisión de la A priori
+
+# Parámetros para phi
+alpha_phi <- 0.001
+beta_phi <- 0.001
+
+# Lista de Datos para Jags:
+data_list <- list(
+  N = nrow(X),              # Número de observaciones
+  p = p,              # Número de predictores
+  X = X,                    # Matriz de diseño
+  y = y,                    # Variable dependiente
+  mu_prior = mu_prior,    # Medias a priori
+  tau_prior = tau_prior,  # Precisión a priori
+  alpha_phi = alpha_phi,  # Hiperparámetro para phi
+  beta_phi = beta_phi     # Hiperparámetro para phi
+)
+```
+
+```{r}
+library(coda)
+# Configura el modelo
+modelo <- jags.model(
+  file = "modelo_beta.jags.txt",
+  data = data_list,
+  n.chains = 5,   # Número de cadenas
+  n.adapt = 5000  # Número de iteraciones de adaptación
+)
+
+# Calentamiento
+update(modelo, 1000)
+
+# Muestras posteriores
+samples <- coda.samples(
+  modelo,
+  variable.names = c("beta", "phi"),
+  n.iter = 20000
+)
+
+# Resumen de resultados
+summary(samples)
+traceplot(samples)
+
+# Diagnóstico de convergencia
+gelman.diag(samples)
+no.iteraciones <- 20000*5
+
+#Simulaciones efectivas
+library(mcmc)
+mcmc_samples <- as.mcmc(jags.model)
+```
+
+
+### Referencias
+
+-   A. Lopez et al (2022). Problemática del suicido en Antioquia.
+    Universidad Nacional Abierta y a Distancia - UNAD.
+    <https://repository.unad.edu.co/jspui/bitstream/10596/49438/1/JBCORDOBAM.pdf>
+
+-   Dávila-Cervantes CA, Pardo-Montaño AM . Impacto de factores
+    socioeconómicos en la mortalidad por suicidios en Colombia,
+    2000-2013. Rev Gerenc Polít Salud. 2017; 16 (33) : 36-51.
+    <https://doi.org/10.11144/> Javeriana.rgps16-33.ifsm
+
+-   Departamento Nacional de Planeación et al.(Octubre 2023).EL SUICIDIO
+    EN COLOMBIA:factores diferenciales entre mujeres y hombres.
+    <https://observatoriomujeres.gov.co/archivos/Publicaciones/Publicacion_311.pdf>
+
+-   Guerrero M, Imelda G.(2005). El suicidio desde una perspectiva
+    socioeconómica cultural. Cuicuilco volumen 12, No.33
+
+-   Moron P. (1987). El Suicidio. Presses Universitares de France.
+    Tomado de:
+    <https://books.google.es/books?hl=es&lr=&id=YkXpHvT9GXcC&oi=fnd&pg=PA1&dq=suicidio&ots=-7ZKiLtYdA&sig=lLOvWElAUf7xn5FBwrXHwJYGx3o#v=onepage&q=suicidio&f=false>
+
+-   Portal Sivigila (2023) Instituto Nacional de Suicidio. Tomado de:
+    <https://portalsivigila.ins.gov.co/Paginas/Buscador.aspx>
+
+-   Sen A. (2000), Desarrollo y Libertad. Editorial Planeta. Buenos
+    Aires.
+
+-   Soto H., Villareal C(2015), Algunas especificidades en torno a la
+    conducta suicida. Medisan vol.19 no.8, Santiago de Cuba.

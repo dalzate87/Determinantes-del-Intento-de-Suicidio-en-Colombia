@@ -1,0 +1,16 @@
+model {
+  for (i in 1:N) {
+    # Distribución Beta para la tasa de suicidio
+    y[i] ~ dbeta(mu[i] * phi, (1 - mu[i]) * phi)
+    # Transformación de los predictores mediante el enlace logit
+    logit(mu[i]) <- inprod(X[i, ], beta)
+  }
+  
+  # Priori para los coeficientes beta
+  for (j in 1:p) {
+    beta[j] ~ dnorm(mu_prior[j], tau_prior[j])
+  }
+  
+  # Priori para phi (parámetro de precisión)
+  phi ~ dgamma(alpha_phi, beta_phi)
+}
