@@ -1,1 +1,1 @@
-A través de metodos bayesianos y GLM se busca realizar estimaciones, con el fin de identificar cuales son los principales factores de riesgos demográficos, económicos y sociales del suicidio en Colombia.
+A través de metodos bayesianos y GLM se busca realizar estimaciones, con el fin de identificar cuales son los principales factores de riesgo demográficos, económicos y sociales del suicidio en Colombia.
